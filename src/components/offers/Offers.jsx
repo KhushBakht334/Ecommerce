@@ -1,7 +1,8 @@
 import React from 'react'
-import './Offers.css'
+import "./Offers.css"
 import exclusive_image from '../Assets/exclusive_image.png'
-const Offers = () => {
+
+export const Offers = () => {
   return (
     <div className='offers'>
         <div className="offers-left">
@@ -16,5 +17,3 @@ const Offers = () => {
     </div>
   )
 }
-
-export default Offers
