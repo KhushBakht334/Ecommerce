@@ -5,7 +5,7 @@ import { Item } from '../components/Item/Item';
 import "./CSS/ShopCategory.css"
 
 export const ShopCategory = ({banner, category}) => {
-  const {shopProducts}=useAuth();
+  const {all_product}=useAuth();
   return (
     <>
     <div className="shop-category">
@@ -19,9 +19,9 @@ export const ShopCategory = ({banner, category}) => {
         </div>
       </div>
       <div className="shopcategory-products">
-        {shopProducts.map((e)=>{
+        {all_product.map((e, id)=>{
           if(category===e.category){
-            return <Item name={e.name} image={e.image} new_price={e.new_price} old_price={e.old_price} key={e.id}/>
+            return <Item name={e.name} image={e.image} new_price={e.new_price} old_price={e.old_price} key={id} id={e.id}/> 
           }else{
             return null
           }

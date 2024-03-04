@@ -1,17 +1,24 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
 import { useAuth } from '../components/Context/ShopContext';
-import arrow_icon from "../components/Assets/arrow.png"
+import Breadcrum from '../components/Breadcum/Breadcum';
+import { ProductDisplay } from '../components/ProductDisplay/ProductDisplay';
+import DescriptionBox from '../components/DescriptionBox/DescriptionBox';
+import RelatedProducts from '../components/RelatedProducts/RelatedProducts';
 
 export const Product = () => {
-  const {shopProducts}=useAuth();
+  const {all_product}=useAuth();
   const {productId}=useParams();
-  const product=shopProducts.find((e)=>e.id===Number(productId))
+  console.log(productId);
+  const product=all_product.find((e)=>e.id===Number(productId));
+  console.log('Product:', product);
   return (
-   <>
-   <div className="breadcrum">
-    HOME <img src={arrow_icon} alt=''/> SHOP <img src={arrow_icon} alt=''/> {product.name}
-   </div>
+    <>
+    <Breadcrum product={product}/>
+    <ProductDisplay product={product}/>
+    <DescriptionBox/>
+    <RelatedProducts/>
     </>
-  )
+  );
+  
 }
