@@ -12,13 +12,38 @@ const getCartItems=()=>{
 export const ShopProvider=({children})=>{
     const [cartItems, setCartItems]=useState(getCartItems());
     console.log(cartItems);
-    const shopProducts={all_product, cartItems};
     const addToCart=(itemId)=>{
         setCartItems((prev)=>({
             ...prev,
             [itemId]:prev[itemId]+1
         }))
     }
+    const removeFromCart=(itemId)=>{
+        setCartItems((prev)=>({
+            ...prev,
+            [itemId]:prev[itemId]-1
+        }))
+    }
+    const getTotalCartAmount=()=>{
+        let totalAmount=0;
+        for(const item in cartItems){
+            if(cartItems[item]>0){
+                let itemInfo=all_product.find((e)=>e.id===Number(item));
+            totalAmount+= itemInfo.new_price * cartItems[item];
+            }
+        }
+        return totalAmount;
+    }
+    const getTotalCartItems=()=>{
+        let totalItem=0;
+        for(const item in cartItems){
+            if(cartItems[item]>0){
+                totalItem+=cartItems[item];
+            }
+        }
+        return totalItem;
+    }
+    const shopProducts={all_product, cartItems,removeFromCart,addToCart,getTotalCartAmount,getTotalCartItems};
     return <ShopContext.Provider value={shopProducts}>
         {children}
     </ShopContext.Provider>

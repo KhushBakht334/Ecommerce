@@ -1,7 +1,10 @@
 import React from 'react'
+import { CartItems } from '../components/CartItems/CartItems'
 
 export const Cart = () => {
   return (
-    <h1>Cart</h1>
+    <>
+    <CartItems/>
+    </>
   )
 }

@@ -2,7 +2,10 @@ import React from 'react'
 import "./ProductDisplay.css"
 import star_icon from "../Assets/star_icon.png"
 import star_dull_icon from "../Assets/star_dull_icon.png"
+import { useAuth } from '../Context/ShopContext'
+
 export const ProductDisplay = ({product}) => {
+    const {addToCart}=useAuth();
   return (
     <>
     <div className='productdisplay'>
@@ -47,7 +50,7 @@ export const ProductDisplay = ({product}) => {
                 <div>XL</div>
                 <div>XXL</div>
             </div>
-            <button>ADD TO CART</button>
+            <button onClick={()=>{addToCart(product.id)}}>ADD TO CART</button>
             <p className='productdisplay-right-category'>
                 <span>Category : </span>Women, T-Shirt, Crop-top
             </p>

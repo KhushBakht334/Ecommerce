@@ -3,8 +3,10 @@ import "./Navbar.css"
 import logo from '../Assets/logo.png'
 import cart from '../Assets/cart_icon.png'
 import { Link } from 'react-router-dom'
+import { useAuth } from '../Context/ShopContext'
 
 export const Navbar = () => {
+    const {getTotalCartItems}=useAuth();
     const [menu, setMenu]=useState("shop");
   return (
     <div className='navbar'>
@@ -21,7 +23,7 @@ export const Navbar = () => {
         <div className="nav-login-cart">
             <button><Link to="/loginsignup" style={{textDecoration:"none"}}>Login</Link></button>
            <Link to="/cart"> <img src={cart} alt=''/></Link>
-            <div className="nav-cart-count">0</div>
+            <div className="nav-cart-count">{getTotalCartItems()}</div>
         </div>
     </div>
   )
