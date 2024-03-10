@@ -1,20 +1,21 @@
 require("dotenv").config();
-const express=require('express');
-const app=express();
-const connectToDB=require("./db/db")
+const express = require('express');
+const app = express();
+const AuthRouter = require("./router/auth");
+const connectToDB = require("./db/db");
+const path = require("path");
 
-app.route("/").get((req, res)=>{
-   try {
-    res.status(200).json("hi momna");
-   } catch (error) {
-    console.log(error);
-   }
-})
+// Serve static files from the 'upload/images' directory
+app.use('/images', express.static(path.join(__dirname, 'upload', 'images')));
 
-const PORT=2000;
+// Route for authentication
+app.use(express.json());
+app.use("/api/auth", AuthRouter);
 
-connectToDB().then(()=>{
-    app.listen(PORT, ()=>{
+const PORT = 2000;
+
+connectToDB().then(() => {
+    app.listen(PORT, () => {
         console.log(`Listening at Port ${PORT}`);
-    })
-})
+    });
+});
