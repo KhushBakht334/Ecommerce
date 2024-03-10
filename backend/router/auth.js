@@ -4,5 +4,7 @@ const authController = require("../controller/auth-controller");
 
 router.route("/upload").post(authController.picUploadMiddleware, authController.picUpload);
 router.route("/addproduct").post(authController.addProduct);
+router.route("/removeproduct").post(authController.removeProduct);
+router.route("/getallproducts").get(authController.getAllProducts);
 
 module.exports = router;
