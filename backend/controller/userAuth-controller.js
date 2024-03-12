@@ -1,12 +1,16 @@
 const User=require("../model/user-model");
 
-const login=async(req, res)=>{
+const register=async(req, res)=>{
     try {
-        // {username,email, password, cartData}=req.body;
-        res.status(200).json("login");
+        const {username,email, password, cartData}=req.body;
+        const userExists=await User.find({email});
+        if(userExists){
+            return res.status(400).json("User already exists");
+        }
+        res.status(200).json("register");
     } catch (error) {
         console.log(error);
     }
 }
 
-module.exports={login}
+module.exports={register}
