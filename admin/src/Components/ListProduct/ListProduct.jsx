@@ -14,6 +14,23 @@ const ListProduct = () => {
   useEffect(()=>{
     fetchAllProducts();
   },[])
+  const removeProduct=async(id)=>{
+    const response=await fetch("http://localhost:2000/api/auth/removeproduct",{
+      method:"POST",
+      headers:{
+        'Content-Type':"application/json"
+      },
+      body:JSON.stringify({id:id})
+    })
+    const data=await response.json();
+    console.log("data", data);
+    if(data.success){
+      alert("Product deleted");
+    }else{
+      alert("Product not deleted")
+    }
+    fetchAllProducts();
+  }
   return (
     <div className='list-product'>
         <h1>All Products List</h1>
@@ -35,7 +52,7 @@ const ListProduct = () => {
               <p>${e.new_price}</p>
               <p>${e.old_price}</p>
               <p>{e.category}</p>
-              <img className='listproduct-remove-icon'src={cross_icon} alt=''/>
+              <img className='listproduct-remove-icon'src={cross_icon} alt='' onClick={()=>removeProduct(e.id)}/>
             </div>
             <hr/>
             </>
