@@ -24,12 +24,12 @@ const ListProduct = () => {
     })
     const data=await response.json();
     console.log("data", data);
+    fetchAllProducts();
     if(data.success){
       alert("Product deleted");
     }else{
       alert("Product not deleted")
     }
-    fetchAllProducts();
   }
   return (
     <div className='list-product'>

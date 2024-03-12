@@ -47,6 +47,7 @@
     font-weight: 500;
 }
 .loginsignup-login span{
+    cursor: pointer;
     color: red;
     font-weight: 600;
 }
