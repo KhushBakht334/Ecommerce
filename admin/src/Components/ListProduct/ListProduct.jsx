@@ -28,7 +28,8 @@ const ListProduct = () => {
         <div className="listproduct-allproducts">
           <hr/>
           {allProducts.map((e, i)=>{
-            return <div key={i} className="listproduct-format-main listproduct-format">
+            return <>
+             <div key={i} className="listproduct-format-main listproduct-format">
               <img src={e.image} alt='' className='listproduct-product-icon'/>
               <p>{e.name}</p>
               <p>${e.new_price}</p>
@@ -36,6 +37,8 @@ const ListProduct = () => {
               <p>{e.category}</p>
               <img className='listproduct-remove-icon'src={cross_icon} alt=''/>
             </div>
+            <hr/>
+            </>
           })}
         </div>
     </div>

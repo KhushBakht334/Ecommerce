@@ -61,7 +61,7 @@ const removeProduct=async(req, res)=>{
             name:req.body.name
         })
     } catch (error) {
-        
+        console.log(error);
     }
 }
 const getAllProducts=async(req, res)=>{
