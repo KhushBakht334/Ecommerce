@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
 import './CSS/LoginSignup.css'
+import { useAuth } from '../components/Context/ShopContext';
 
 export const LoginSignup = () => {
+  const {storeTokenInLS}=useAuth();
   const [state, setState]=useState("Login");
   const [formData, setFormData]=useState({
     username:"",
@@ -25,9 +27,10 @@ export const LoginSignup = () => {
       },
       body:JSON.stringify(formData)
     })
-    const data=await response.json();
-    console.log("data saved", data);
-    if(data.success){
+    if(response.ok){
+      const data=await response.json();
+      console.log("data saved", data);
+      storeTokenInLS(data.token);
       alert("Logged in successfully");
       setFormData({
         email:"",
@@ -44,9 +47,10 @@ export const LoginSignup = () => {
       },
       body:JSON.stringify(formData)
     })
-    const data=await response.json();
-    console.log("registred successfully", data);
-    if(data.success){
+    if(response.ok){
+      const data=await response.json();
+      console.log("registred successfully", data);
+      storeTokenInLS(data.token);
       alert("Registered successfully");
       setFormData({
         username:"",

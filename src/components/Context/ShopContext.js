@@ -10,6 +10,7 @@ const getCartItems=()=>{
     return cart;
 }
 export const ShopProvider=({children})=>{
+    const [token, setToken]=useState(localStorage.getItem("token"));
     const [cartItems, setCartItems]=useState(getCartItems());
     console.log(cartItems);
     const addToCart=(itemId)=>{
@@ -17,6 +18,13 @@ export const ShopProvider=({children})=>{
             ...prev,
             [itemId]:prev[itemId]+1
         }))
+    }
+    const storeTokenInLS=(token)=>{
+        return localStorage.setItem("token", token)
+    }
+    const logoutUser=()=>{
+        setToken("");
+        return localStorage.removeItem("token");
     }
     const removeFromCart=(itemId)=>{
         setCartItems((prev)=>({
@@ -43,7 +51,7 @@ export const ShopProvider=({children})=>{
         }
         return totalItem;
     }
-    const shopProducts={all_product, cartItems,removeFromCart,addToCart,getTotalCartAmount,getTotalCartItems};
+    const shopProducts={all_product, cartItems,removeFromCart,addToCart,getTotalCartAmount,getTotalCartItems,storeTokenInLS,logoutUser};
     return <ShopContext.Provider value={shopProducts}>
         {children}
     </ShopContext.Provider>

@@ -29,6 +29,7 @@ export const Navbar = () => {
         </ul>
         <div className="nav-login-cart">
             <button><Link to="/loginsignup" style={{textDecoration:"none"}}>Login</Link></button>
+            <button>Logout</button>
            <Link to="/cart"> <img src={cart} alt=''/></Link>
             <div className="nav-cart-count">{getTotalCartItems()}</div>
         </div>
