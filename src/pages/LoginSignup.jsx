@@ -17,11 +17,46 @@ export const LoginSignup = () => {
       [name]:value
     })
   }
-  const login=()=>{
-    console.log("login", formData);
+  const login=async()=>{
+    const response=await fetch("http://localhost:2000/user/api/auth/login",{
+      method:"POST",
+      headers:{
+        "Content-Type":"application/json"
+      },
+      body:JSON.stringify(formData)
+    })
+    const data=await response.json();
+    console.log("data saved", data);
+    if(data.success){
+      alert("Logged in successfully");
+      setFormData({
+        email:"",
+        password:""
+      })
+    }
   }
-  const signup=()=>{
-    console.log("signup", formData);
+  const signup=async()=>{
+    try {
+      const response=await fetch("http://localhost:2000/user/api/auth/register",{
+      method:"POST",
+      headers:{
+        "Content-Type":"application/json"
+      },
+      body:JSON.stringify(formData)
+    })
+    const data=await response.json();
+    console.log("registred successfully", data);
+    if(data.success){
+      alert("Registered successfully");
+      setFormData({
+        username:"",
+        email:"",
+        password:""
+      })
+    }
+    } catch (error) {
+      console.log(error);
+    }
   }
   return (
     <div className='loginsignup'>
