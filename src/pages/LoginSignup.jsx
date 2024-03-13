@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import './CSS/LoginSignup.css'
 import { useAuth } from '../components/Context/ShopContext';
+import { useNavigate } from 'react-router-dom';
 
 export const LoginSignup = () => {
+  const navigate=useNavigate();
   const {storeTokenInLS}=useAuth();
   const [state, setState]=useState("Login");
   const [formData, setFormData]=useState({
@@ -36,6 +38,7 @@ export const LoginSignup = () => {
         email:"",
         password:""
       })
+      navigate("/");
     }
   }
   const signup=async()=>{
@@ -57,6 +60,7 @@ export const LoginSignup = () => {
         email:"",
         password:""
       })
+      navigate("/login");
     }
     } catch (error) {
       console.log(error);

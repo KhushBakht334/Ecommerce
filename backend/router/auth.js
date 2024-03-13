@@ -6,5 +6,6 @@ router.route("/upload").post(authController.picUploadMiddleware, authController.
 router.route("/addproduct").post(authController.addProduct);
 router.route("/removeproduct").post(authController.removeProduct);
 router.route("/getallproducts").get(authController.getAllProducts);
+router.route("/newcollections").get(authController.newCollections);
 
 module.exports = router;

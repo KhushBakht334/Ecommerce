@@ -73,4 +73,11 @@ const getAllProducts=async(req, res)=>{
         console.log(error);
     }
 }
-module.exports = { picUploadMiddleware, picUpload ,addProduct,removeProduct,getAllProducts};
+const newCollections=async(req, res)=>{
+    try {
+        
+    } catch (error) {
+        console.log(error);
+    }
+}
+module.exports = { picUploadMiddleware, picUpload ,addProduct,removeProduct,getAllProducts,newCollections};

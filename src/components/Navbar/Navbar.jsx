@@ -11,7 +11,7 @@ export const Navbar = () => {
         menuRef.current.classList.toggle('nav-menu-visible');
         e.target.classList.toggle('open')
     }
-    const {getTotalCartItems}=useAuth();
+    const {getTotalCartItems, isLoggedIn}=useAuth();
     const [menu, setMenu]=useState("shop");
     const menuRef=useRef();
   return (
@@ -28,8 +28,11 @@ export const Navbar = () => {
             <li onClick={()=>setMenu("kids")}><Link to="/kids" style={{textDecoration:"none"}}>Kids</Link>{menu==="kids"? <hr/>:""}</li>
         </ul>
         <div className="nav-login-cart">
+            {isLoggedIn? 
+            <button><Link to="/logout" style={{textDecoration:"none"}}>Logout</Link></button>
+            :
             <button><Link to="/loginsignup" style={{textDecoration:"none"}}>Login</Link></button>
-            <button>Logout</button>
+            }
            <Link to="/cart"> <img src={cart} alt=''/></Link>
             <div className="nav-cart-count">{getTotalCartItems()}</div>
         </div>

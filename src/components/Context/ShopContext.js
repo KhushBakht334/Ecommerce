@@ -1,18 +1,32 @@
+import { useEffect } from "react";
 import { createContext, useContext, useState } from "react";
-import all_product from "../Assets/all_product"
 export const ShopContext=createContext();
 
 const getCartItems=()=>{
     let cart={};
-    for(let index=0; index<all_product.length; index++){
+    for(let index=0; index<300+1; index++){
         cart[index]=0;
     }
     return cart;
 }
 export const ShopProvider=({children})=>{
+    const [all_product, setAll_product]=useState([]);
     const [token, setToken]=useState(localStorage.getItem("token"));
     const [cartItems, setCartItems]=useState(getCartItems());
+    const isLoggedIn=token;
     console.log(cartItems);
+    useEffect(() => {
+        async function fetchData() {
+            const response = await fetch('http://localhost:2000/api/auth/getallproducts', {
+                method: "GET"
+            });
+            const data = await response.json();
+            setAll_product(data);
+        }
+    
+        fetchData();
+    }, []);
+    
     const addToCart=(itemId)=>{
         setCartItems((prev)=>({
             ...prev,
@@ -20,6 +34,7 @@ export const ShopProvider=({children})=>{
         }))
     }
     const storeTokenInLS=(token)=>{
+        setToken(token);
         return localStorage.setItem("token", token)
     }
     const logoutUser=()=>{
@@ -51,7 +66,7 @@ export const ShopProvider=({children})=>{
         }
         return totalItem;
     }
-    const shopProducts={all_product, cartItems,removeFromCart,addToCart,getTotalCartAmount,getTotalCartItems,storeTokenInLS,logoutUser};
+    const shopProducts={all_product, cartItems,removeFromCart,addToCart,getTotalCartAmount,getTotalCartItems,storeTokenInLS,logoutUser,isLoggedIn};
     return <ShopContext.Provider value={shopProducts}>
         {children}
     </ShopContext.Provider>

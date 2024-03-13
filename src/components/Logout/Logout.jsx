@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react'
-import { useAuth } from '../store/context';
 import { Navigate } from 'react-router-dom';
+import { useAuth } from '../Context/ShopContext';
 
 const Logout = () => {
     const {logoutUser}=useAuth();
