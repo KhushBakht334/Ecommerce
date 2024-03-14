@@ -30,7 +30,21 @@ export const ShopProvider=({children})=>{
         setCartItems((prev)=>({
             ...prev,
             [itemId]:prev[itemId]+1
-        }))
+        })
+        )
+        if(isLoggedIn){
+            fetch("http://localhost:2000/api/auth/addtocart",{
+                method:"POST",
+                headers:{
+                    Accept:"application/form-data",
+                   "Authorization":`${token}`,
+                   'Content-Type':"application/json"
+                },
+                body:JSON.stringify({"itemId":itemId})
+            })
+            .then((response)=>response.json())
+            .then((data)=>console.log(data))
+        }
     }
     const storeTokenInLS=(token)=>{
         setToken(token);

@@ -8,5 +8,6 @@ router.route("/removeproduct").post(authController.removeProduct);
 router.route("/getallproducts").get(authController.getAllProducts);
 router.route("/newcollections").get(authController.newCollections);
 router.route("/popularinwomen").get(authController.popularWomen);
+router.route("/addtocart").get(authController.addToCart);
 
 module.exports = router;

@@ -92,4 +92,11 @@ const popularWomen=async(req, res)=>{
         console.log(error);
     }
 }
-module.exports = { picUploadMiddleware, picUpload ,addProduct,removeProduct,getAllProducts,newCollections,popularWomen};
+const addToCart=async(req, res)=>{
+    try {
+        console.log(req.body);
+    } catch (error) {
+        console.log(error);
+    }
+}
+module.exports = { picUploadMiddleware, picUpload ,addProduct,removeProduct,getAllProducts,newCollections,popularWomen,addToCart};
