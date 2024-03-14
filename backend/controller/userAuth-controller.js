@@ -35,4 +35,13 @@ const login=async(req, res)=>{
         console.log(error);
     }
 }
-module.exports={register, login}
+
+const fetchUser=async(req, res)=>{
+    try {
+        const response=req.user;
+        res.status(200).json(response)
+    } catch (error) {
+        console.log(error);
+    }
+}
+module.exports={register, login,fetchUser}
