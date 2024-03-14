@@ -75,9 +75,21 @@ const getAllProducts=async(req, res)=>{
 }
 const newCollections=async(req, res)=>{
     try {
-        
+        const products=await Product.find({});
+        const new_collection= products.slice(1).slice(-8);
+        console.log('products fetched');
+        res.status(200).json(new_collection);
     } catch (error) {
         console.log(error);
     }
 }
-module.exports = { picUploadMiddleware, picUpload ,addProduct,removeProduct,getAllProducts,newCollections};
+const popularWomen=async(req, res)=>{
+    try {
+        const products=await Product.find({category:"women"});
+        const popular_women=products.slice(1,4);
+        res.status(200).json(popular_women);
+    } catch (error) {
+        console.log(error);
+    }
+}
+module.exports = { picUploadMiddleware, picUpload ,addProduct,removeProduct,getAllProducts,newCollections,popularWomen};

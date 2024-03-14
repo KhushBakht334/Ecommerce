@@ -23,7 +23,6 @@ export const ShopProvider=({children})=>{
             const data = await response.json();
             setAll_product(data);
         }
-    
         fetchData();
     }, []);
     
