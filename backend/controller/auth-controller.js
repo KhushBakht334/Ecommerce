@@ -94,7 +94,7 @@ const popularWomen=async(req, res)=>{
 }
 const addToCart=async(req, res)=>{
     try {
-        res.status(200).json(req.body);
+        console.log(req.body, req.user);
     } catch (error) {
         console.log(error);
     }
