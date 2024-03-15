@@ -10,5 +10,7 @@ router.route("/getallproducts").get(authController.getAllProducts);
 router.route("/newcollections").get(authController.newCollections);
 router.route("/popularinwomen").get(authController.popularWomen);
 router.route("/addtocart").post(fetchUserMiddleware, authController.addToCart);
+router.route("/removeFromCart").post(fetchUserMiddleware, authController.removeFromCart);
+router.route("/getCart").post(fetchUserMiddleware, authController.getCart);
 
 module.exports = router;

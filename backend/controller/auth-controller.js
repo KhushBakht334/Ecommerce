@@ -1,6 +1,7 @@
 const multer = require("multer");
 const path = require("path");
 const Product=require("../model/pic_model");
+const User = require("../model/user-model");
 
 const storage = multer.diskStorage({
     destination: './upload/images',
@@ -94,9 +95,34 @@ const popularWomen=async(req, res)=>{
 }
 const addToCart=async(req, res)=>{
     try {
-        console.log(req.body, req.user);
+        let userData=await User.findOne({_id:req.user._id});
+        console.log("Added",req.body.itemId);
+        userData.cartData[req.body.itemId] +=1;
+        await User.findOneAndUpdate({_id:req.user._id},{cartData:userData.cartData});
+        res.send("Added")
     } catch (error) {
         console.log(error);
     }
 }
-module.exports = { picUploadMiddleware, picUpload ,addProduct,removeProduct,getAllProducts,newCollections,popularWomen,addToCart};
+const removeFromCart=async(req, res)=>{
+    try {
+        let userData=await User.findOne({_id:req.user._id});
+        console.log("Removed",req.body.itemId);
+        if(userData.cartData[req.body.itemId]>0)
+        userData.cartData[req.body.itemId] -=1;
+        await User.findOneAndUpdate({_id:req.user._id},{cartData:userData.cartData});
+        res.send("Removed")
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+const getCart=async(req,res)=>{
+    try {
+        let userData=await User.findOne({_id:req.user._id});
+        res.json(userData.cartData);
+    } catch (error) {
+        console.log(error);
+    }
+}
+module.exports = { picUploadMiddleware, picUpload ,addProduct,removeProduct,getAllProducts,newCollections,popularWomen,addToCart,removeFromCart,getCart};

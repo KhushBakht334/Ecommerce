@@ -23,7 +23,23 @@ export const ShopProvider=({children})=>{
             const data = await response.json();
             setAll_product(data);
         }
-        fetchData();
+        if(isLoggedIn){
+            async function cartData(){
+                const response = await fetch('http://localhost:2000/api/auth/getCart', {
+                    method: "POST",
+                    headers:{
+                        Accept:"application/form-data",
+                        "Authorization":`${token}`,
+                        'Content-Type':"application/json"
+                    },
+                    body:""
+                });
+                const data = await response.json();
+                setCartItems(data);
+            }
+            fetchData();
+            cartData();
+        }
     }, []);
     
     const addToCart=(itemId)=>{
@@ -58,7 +74,20 @@ export const ShopProvider=({children})=>{
         setCartItems((prev)=>({
             ...prev,
             [itemId]:prev[itemId]-1
-        }))
+        }));
+        if(isLoggedIn){
+            fetch("http://localhost:2000/api/auth/removeFromCart",{
+                method:"POST",
+                headers:{
+                    Accept:"application/form-data",
+                   "Authorization":`${token}`,
+                   'Content-Type':"application/json"
+                },
+                body:JSON.stringify({"itemId":itemId})
+            })
+            .then((response)=>response.json())
+            .then((data)=>console.log("data",data))
+        }
     }
     const getTotalCartAmount=()=>{
         let totalAmount=0;
